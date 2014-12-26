@@ -1,1 +1,12 @@
 /app/etc/local.xml
+
+media/
+!media/customer/
+!media/dhl/
+!media/downloadable/
+!media/xmlconnect/
+!media/.htaccess
+
+var/cache/
+var/session/
+

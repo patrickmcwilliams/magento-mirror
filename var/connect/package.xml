@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<package>
+    <name>Tealium_Tags</name>
+    <version>1.2.1</version>
+    <stability>stable</stability>
+    <license uri="http://opensource.org/licenses/osl-3.0.php">OSL v3.0</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>Tealum tag management solution</summary>
+    <description>Tealum tag management solution extension injects the Tealium javascript into your magento pages, and on specific pages injects special javascript so that you can access specific data elements such as product, category or cart data.</description>
+    <notes>1.2.0 - Added UI admin toggle for onePage Checkout&#xD;
+1.1.1 - Fixed pages not rendering&#xD;
+1.1.0 - Added support for alternate checkout pages&#xD;
+1.0.2 - Added html/text help to admin config&#xD;
+1.0.1 - Fixed arrays that were rendering as strings&#xD;
+1.0.0 - refactored based on Tealium class&#xD;
+    * added support for external UDO definition&#xD;
+    * added support for diagnostic pixel&#xD;
+0.4.4d - added output of diagnostic pixel&#xD;
+0.4.4 - strip commas from all dollar values&#xD;
+0.4.3 - fix for bad array on order page&#xD;
+0.4.2 - added simple discount array&#xD;
+0.4.0 - fix for individual discounts and number formats&#xD;
+0.3.1 - fix for configurable product arrays&#xD;
+0.3.0 - fix for missing support message&#xD;
+0.2.0 - fix for product page tag syntax&#xD;
+0.1.0 - initial release</notes>
+    <authors><author><name>Patrick McWilliams</name><user>Tealium</user><email>patrick.mcwilliams@tealium.com</email></author></authors>
+    <date>2014-11-24</date>
+    <time>23:29:49</time>
+    <contents><target name="magelocal"><dir name="Tealium"><dir name="Tags"><dir name="Helper"><file name="Data.php" hash="3cac8fff341d075527acc3ac0a02bc7a"/></dir><dir name="etc"><file name="adminhtml.xml" hash="e6ec5ba973cdb97a9925f02575392865"/><file name="config.xml" hash="c736b55d5e3cc05cbf7bc27fe7a851e5"/><file name="system.xml" hash="fd47c6ca585b324261bf12a54df2b3bb"/></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Tealium_Tags.xml" hash="3d6843433dffefb4600573950a83e765"/></dir></target><target name="magedesign"><dir name="frontend"><dir name="base"><dir name="default"><dir name="layout"><file name="tealium_tags.xml" hash="f1a764ba60627bbf4b0113c454bb892a"/></dir><dir name="template"><dir name="tealium_tags"><file name="base.phtml" hash="459db6812a160ac45c37c7a46d72fea1"/><file name="catalog_product_compare_index.phtml" hash="810cb1cf8b17ab77d5addf75097dcc12"/><file name="catalogsearch_advanced_result_index.phtml" hash="df8e2d21436261f855dcb4bb1d6497fb"/><file name="catalogsearch_result_index.phtml" hash="063b17148b5d031e4a445d59d85a02c1"/><file name="catalogsearch_term_popular.phtml" hash="a1cb09d5ccd9c8de24704a0cc50b15ab"/><file name="category.phtml" hash="6b3bfa75f142d2ac45b2a7a68fe09024"/><file name="checkout_cart_index.phtml" hash="20d90e76ded92964e1e406353a1ae777"/><file name="checkout_onepage.phtml" hash="c9be29b50f4538392774d2444aff7328"/><file name="checkout_success.phtml" hash="82eedb745c4a17c7864089f746104575"/><file name="cms.phtml" hash="b27d54573e11d3ed64f9fc4e3b842d32"/><file name="customer.phtml" hash="edbac3f55223f19edd5f78f66ceb4a16"/><file name="generic.phtml" hash="0a090a69bfa7278504bdeab83a86b846"/><file name="guest_sales.phtml" hash="e8c438cddca07aa8e44549c6c63f6b08"/><file name="product.phtml" hash="c5568efedd7cd11803a9558566e8d1f1"/><file name="product_send.phtml" hash="b55cc99a06028171333aad3f16f8e7b3"/><file name="seo.phtml" hash="8a5c742b13e79c8019e4619d7aba1eba"/><file name="tag_list_index.phtml" hash="28e29c829cf63b2df00d04dcb544e450"/><file name="tag_product_list.phtml" hash="e6bf4fc7d91f5378d3d53dcd455f73f9"/><file name=".DS_Store" hash="d983a1cf743a40857fd57d923dfbb0d4"/><file name=".checkout_success.phtml.swp" hash="9b57a7ce9a428a02d446520e721f9d27"/></dir></dir></dir></dir></dir></target><target name="magelib"><dir name="Tealium"><file name="Errors.log.txt" hash="d41d8cd98f00b204e9800998ecf8427e"/><file name="Tealium.php" hash="8239140cb4c8331fa7c05f2d4bdeca84"/><file name="TealiumAPI.php" hash="8ff735cbea9409d365cde877cd177ceb"/><file name="TealiumInit.php" hash="6af8c3cb021366d6e905f5fe54d1d548"/><file name=".Tealium.php.swp" hash="269cb2dbd9f38fd49f490050ec74e88d"/></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.1.0</min><max>6.0.0</max></php></required></dependencies>
+</package>

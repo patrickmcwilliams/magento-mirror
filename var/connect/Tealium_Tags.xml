@@ -1,0 +1,120 @@
+<_>
+   <form_key>9PSAx72wH6sdLQH0</form_key>
+   <name>Tealium_Tags</name>
+   <channel>community</channel>
+   <version_ids>
+      <version_ids>2</version_ids>
+   </version_ids>
+   <summary>Tealum tag management solution</summary>
+   <description>Tealum tag management solution extension injects the Tealium javascript into your magento pages, and on specific pages injects special javascript so that you can access specific data elements such as product, category or cart data.</description>
+   <license>OSL v3.0</license>
+   <license_uri>http://opensource.org/licenses/osl-3.0.php</license_uri>
+   <version>1.2.1</version>
+   <stability>stable</stability>
+   <notes>1.2.0 - Added UI admin toggle for onePage Checkout
+1.1.1 - Fixed pages not rendering
+1.1.0 - Added support for alternate checkout pages
+1.0.2 - Added html/text help to admin config
+1.0.1 - Fixed arrays that were rendering as strings
+1.0.0 - refactored based on Tealium class
+    * added support for external UDO definition
+    * added support for diagnostic pixel
+0.4.4d - added output of diagnostic pixel
+0.4.4 - strip commas from all dollar values
+0.4.3 - fix for bad array on order page
+0.4.2 - added simple discount array
+0.4.0 - fix for individual discounts and number formats
+0.3.1 - fix for configurable product arrays
+0.3.0 - fix for missing support message
+0.2.0 - fix for product page tag syntax
+0.1.0 - initial release</notes>
+   <authors>
+      <name>
+         <name>Patrick McWilliams</name>
+      </name>
+      <user>
+         <user>Tealium</user>
+      </user>
+      <email>
+         <email>patrick.mcwilliams@tealium.com</email>
+      </email>
+   </authors>
+   <depends_php_min>5.1.0</depends_php_min>
+   <depends_php_max>6.0.0</depends_php_max>
+   <depends>
+      <package>
+         <name>
+            <name/>
+         </name>
+         <channel>
+            <channel/>
+         </channel>
+         <min>
+            <min/>
+         </min>
+         <max>
+            <max/>
+         </max>
+         <files>
+            <files>                              </files>
+         </files>
+      </package>
+      <extension>
+         <name>
+            <name>Core</name>
+         </name>
+         <min>
+            <min/>
+         </min>
+         <max>
+            <max/>
+         </max>
+      </extension>
+   </depends>
+   <contents>
+      <target>
+         <target>magelocal</target>
+         <target>magelocal</target>
+         <target>mageetc</target>
+         <target>magedesign</target>
+         <target>magedesign</target>
+         <target>magelib</target>
+      </target>
+      <path>
+         <path/>
+         <path>Tealium</path>
+         <path>modules/Tealium_Tags.xml</path>
+         <path>frontend/base/default/layout/tealium_tags.xml</path>
+         <path>frontend/base/default/template/tealium_tags</path>
+         <path>Tealium</path>
+      </path>
+      <type>
+         <type>file</type>
+         <type>dir</type>
+         <type>file</type>
+         <type>file</type>
+         <type>dir</type>
+         <type>dir</type>
+      </type>
+      <include>
+         <include/>
+         <include>/.*/</include>
+         <include/>
+         <include/>
+         <include>/.*/</include>
+         <include>/.*/</include>
+      </include>
+      <ignore>
+         <ignore/>
+         <ignore>/^\..*/</ignore>
+         <ignore/>
+         <ignore/>
+         <ignore>/^\..*/</ignore>
+         <ignore>/^\..*/</ignore>
+      </ignore>
+   </contents>
+   <page>1</page>
+   <limit>200</limit>
+   <folder/>
+   <package/>
+</_>
