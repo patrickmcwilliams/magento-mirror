@@ -1,0 +1,43 @@
+<?php
+
+$helper = Mage::helper('tealium_tags');
+$store = Mage::app()->getStore();
+
+if (!$helper->isEnabled($store)) {
+    return; // not enabled, no javascript inserted
+}
+
+$terms = array();
+
+if( sizeof($this->getTerms()) > 0 ) {
+    foreach ($this->getTerms() as $_term) {
+        $terms[] = $_term->getName();
+    }
+} else {
+    $terms[] = "no-terms";
+}
+
+$customData = array();
+$customData["page_type"] = "popular search terms";
+$customData["page_name"] = $this->getLayout()->getBlock('head')->getTitle();
+$customData["search_keyword"] = implode('","', $terms);
+
+$tealium = $helper->init($store, $this, "Search")->
+	addCustomDataFromSetup($store, "Search")->
+	addCustomDataFromObject($customData)->
+	getTealiumObject();
+
+if ($helper->getIsExternalScript($store)){
+	$syncType = "sync";
+	$externalScriptType = $helper->getExternalScriptType($store);
+	if ($externalScriptType == "sync" || $externalScriptType == "async"){
+		$syncType = $externalScriptType;
+	}
+	echo $tealium->render("full", true, $syncType);
+}
+else {
+	echo $tealium->render("udo");
+}
+
+echo $helper->getDiagnosticTag($store);
+?>
