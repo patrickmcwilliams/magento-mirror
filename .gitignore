@@ -9,4 +9,25 @@ media/
 
 var/cache/
 var/session/
+var/log/
+var/package/
+var/report/
+
+.buildpath
+
+.project
+
+.settings/
+
+app/code/local/Tealium/
+
+app/design/frontend/base/default/layout/tealium_tags.xml
+
+app/design/frontend/base/default/template/tealium_tags/
+
+app/etc/modules/Tealium_Tags.xml
+
+downloader/
+
+lib/Tealium/
 
