@@ -1,5 +1,5 @@
 <_>
-   <form_key>5EY554KbwW26QM15</form_key>
+   <form_key>Y4yOf8jpTrvbCRZx</form_key>
    <name>Tealium_Tags</name>
    <channel>community</channel>
    <version_ids>
@@ -9,9 +9,10 @@
    <description>Tealum tag management solution extension injects the Tealium javascript into your magento pages, and on specific pages injects special javascript so that you can access specific data elements such as product, category or cart data.</description>
    <license>OSL v3.0</license>
    <license_uri>http://opensource.org/licenses/osl-3.0.php</license_uri>
-   <version>2.0.0</version>
+   <version>2.0.1</version>
    <stability>stable</stability>
-   <notes>2.0.0 - Added external script support and refactored
+   <notes>2.0.1 - Fix for extended UDO rendering blank page
+2.0.0 - Added external script support and refactored
 1.2.0 - Added UI admin toggle for onePage Checkout
 1.1.1 - Fixed pages not rendering
 1.1.0 - Added support for alternate checkout pages
@@ -57,7 +58,7 @@
             <max/>
          </max>
          <files>
-            <files>                                  </files>
+            <files>                                   </files>
          </files>
       </package>
       <extension>

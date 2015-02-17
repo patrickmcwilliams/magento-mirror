@@ -3,6 +3,8 @@ require_once (Mage::getBaseDir ( 'lib' ) . '/Tealium/Tealium.php');
 
 class Tealium_Tags_Helper_Data extends Mage_Core_Helper_Abstract {
 	protected $tealium;
+	protected $store;
+	protected $page;
 	public function init(&$store, &$page = array(), $pageType) {
 
 		$account = $this->getAccount ( $store );
@@ -13,27 +15,33 @@ class Tealium_Tags_Helper_Data extends Mage_Core_Helper_Abstract {
 				"store" => $store,
 				"page" => $page 
 		);
-		$this->tealium = new Tealium ( $account, $profile, $env, $pageType, $data );
+		$this->store = $store;
+		$this->page = $page;
+		$this->tealium = new Tealium( $account, $profile, $env, $pageType, $data );
 		
 		return $this;
 	}
 	
 	public function addCustomDataFromSetup(&$store, $pageType){
+		$data = array (
+				"store" => $this->store,
+				"page" => $this->page
+		);
 		if (Mage::getStoreConfig ( 'tealium_tags/general/udo_enable', $store )) {
-			@include_once (Mage::getStoreConfig ( 'tealium_tags/general/udo', $store ));
+			include_once (Mage::getStoreConfig ( 'tealium_tags/general/udo', $store ));
 
 			if ( method_exists($this, "getCustomUdo") ){
 				$customUdoElements = getCustomUdo();
-				if ( is_array($customUdoElements) && isAssocArray($customUdoElements) ){
+				if ( is_array($customUdoElements) && self::isAssocArray($customUdoElements) ){
 					$udoElements = $customUdoElements;
 				}
 			}
-			elseif (!isset($udoElements) || ( isset($udoElements) && !isAssocArray($udoElements) )){
+			elseif (!isset($udoElements) || ( isset($udoElements) && !self::isAssocArray($udoElements) )){
 				$udoElements = array();
 			}
 			
 			if ( isset($udoElements[$pageType]) ){
-				$this->tealium->updateUdo($udoElements[$pageType]);
+				$this->tealium->setCustomUdo($udoElements[$pageType]);
 			}
 			
 		}
@@ -42,7 +50,7 @@ class Tealium_Tags_Helper_Data extends Mage_Core_Helper_Abstract {
 	}
 	
 	public function addCustomDataFromObject($udoObject){
-		if ( is_array($udoObject) && isAssocArray($udoObject) ){
+		if ( is_array($udoObject) && self::isAssocArray($udoObject) ){
 			$this->tealium->updateUdo($udoObject);
 		}
 		return $this;

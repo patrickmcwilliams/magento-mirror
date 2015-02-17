@@ -112,32 +112,130 @@
 									<div style="display:none; background-color:#000; color:#0F0" id="code_example"> 
 									<pre>
 &lt;?php
-// TealiumInit.php var definition file
-// Replace $STRING or $ARRAY with your server side variable reference unique to that key 
-$store = $data[&quot;store&quot;];
-$page  = $data[&quot;page&quot;];
+// TealiumExtendData use this to override or extend default values proivided by the Tealium module
+
+class TealiumExtendData {
+	private static $store;
+	private static $page;
+	
+	public static function setStore($store){
+		TealiumExtendData::$store = $store;
+	}
+	
+	public static function setPage($page){
+		TealiumExtendData::$page = $page;
+	}
+	
+	public function getHome(){
+		$store = TealiumExtendData::$store;
+		$page = TealiumExtendData::$page;
+		
+		$outputArray = array();
+		//$outputArray[&quot;custom_key&quot;] = "value";
+		
+		return $outputArray;
+	}
+	
+	public function getSearch(){
+		$store = TealiumExtendData::$store;
+		$page = TealiumExtendData::$page;
+		
+		$outputArray = array();
+		//$outputArray[&quot;custom_key&quot;] = "value";
+
+		return $outputArray;
+	}
+	
+	public function getCategory(){
+		$store = TealiumExtendData::$store;
+		$page = TealiumExtendData::$page;
+		
+		$outputArray = array();
+		//$outputArray[&quot;custom_key&quot;] = "value";
+		
+		return $outputArray;
+	}
+	
+	public function getProductPage(){
+		$store = TealiumExtendData::$store;
+		$page = TealiumExtendData::$page;
+		
+		$outputArray = array();
+		//$outputArray[&quot;custom_key&quot;] = "value";
+		// make sure any product values are in an array
+		
+		return $outputArray;
+	}
+	
+	public function getCartPage() {
+		$store = TealiumExtendData::$store;
+		$page = TealiumExtendData::$page;
+		
+		$outputArray = array();
+		//$outputArray[&quot;custom_key&quot;] = "value";
+		// make sure any product values are in an array
+		
+		return $outputArray;
+	}
+	
+	public function getOrderConfirmation(){
+		$store = TealiumExtendData::$store;
+		$page = TealiumExtendData::$page;
+		
+		$outputArray = array();
+		//$outputArray[&quot;custom_key&quot;] = "value";
+		// make sure any product values are in an array
+		
+		return  $outputArray;
+	}
+	
+	public function getCustomerData(){
+		$store = TealiumExtendData::$store;
+		$page = TealiumExtendData::$page;
+		
+		$outputArray = array();
+		//$outputArray[&quot;custom_key&quot;] = "value";
+		
+		return $outputArray;
+	}
+}
+
+
+TealiumExtendData::setStore($data["store"]);
+TealiumExtendData::setPage($data["page"]);
 
 
 $udoElements = array(
-    Home =&gt; array(
-		foo 		=&gt; &quot;bar&quot;,
-		test		=&gt; &quot;var&quot;,
-		site_region =&gt; &quot;modified: &quot; . Mage::app()-&gt;getLocale()-&gt;getLocaleCode() ?: 
-		&quot;&quot;, //&quot;uk&quot;,
-    ),
-    Search =&gt; array(
-    ),
-    Category =&gt; array(
-    ),
-    ProductPage =&gt; array(
-    ),
-    Cart =&gt; array(
-    ),
-    Confirmation =&gt; array(
-    ),
-    Customer =&gt; array(
-    )
+    &quot;Home&quot; =&gt; function(){
+    	$tealiumData = new TealiumExtendData();
+    	return $tealiumData-&gt;getHome();
+    },
+    &quot;Search&quot; =&gt; function(){
+    	$tealiumData = new TealiumExtendData();
+    	return $tealiumData-&gt;getSearch();
+    },
+    &quot;Category&quot; =&gt; function(){
+    	$tealiumData = new TealiumExtendData();
+    	return $tealiumData-&gt;getCategory();
+    },
+    &quot;ProductPage&quot; =&gt; function(){
+    	$tealiumData = new TealiumExtendData();
+    	return $tealiumData-&gt;getProductPage();
+    },
+    &quot;Cart&quot; =&gt; function(){
+    	$tealiumData = new TealiumExtendData();
+    	return $tealiumData-&gt;getCartPage();
+    },
+    &quot;Confirmation&quot; =&gt; function(){
+    	$tealiumData = new TealiumExtendData();
+    	return $tealiumData-&gt;getOrderConfirmation();
+    },
+    &quot;Customer&quot; =&gt; function(){
+    	$tealiumData = new TealiumExtendData();
+    	return $tealiumData-&gt;getCustomerData();
+    }
 );
+
 
 ?&gt; 
 									</pre>

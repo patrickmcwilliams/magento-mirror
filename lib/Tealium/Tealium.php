@@ -7,6 +7,7 @@ class Tealium {
 	private $target;
 	private $udo;
 	private $udoElements;
+	private $customUdo;
 	
 	public function __construct( $accountInit = false, 
 								 $profileInit = false, 
@@ -52,11 +53,13 @@ class Tealium {
 			$udo[$objectOrKey] = $value;
 		}
 		
-		$this->udo = function(){
-			return $udo;
-		};
+		$this->udo = $udo;
 		
 		return $this->udo;
+	}
+	
+	public function setCustomUdo($udo){
+		$this->customUdo = $udo;
 	}
 	
 	public function pageType($pageType = "Home") {
@@ -66,7 +69,7 @@ class Tealium {
 	}
 	public function render($type = null, $external = false, $sync = "sync") {
 		
-		if ( !($_REQUEST ["tealium_api"] && $_REQUEST ["tealium_api"]) == "true" && $external) {
+		if ( !($_REQUEST ["tealium_api"] && $_REQUEST ["tealium_api"] == "true") && $external) {
 			$type = "udo";
 			$is_async = ($sync == "sync") ? "" : "async";
 			$udo = "<script type=\"text/javascript\" src=\"";
@@ -80,6 +83,9 @@ class Tealium {
 			$udo .= "tealium_api=true\" $is_async></script>";
 		} 
 		else {
+			if (isset($this->customUdo)){
+				$this->updateUdo($this->customUdo);
+			}
 			$udoObject = $this->udo;
 			if ($udoObject instanceof Closure) {
 				$udoJson = json_encode ( $udoObject() );
