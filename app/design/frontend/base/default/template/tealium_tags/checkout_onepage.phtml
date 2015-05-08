@@ -34,13 +34,12 @@ echo <<<EOD
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded',function(){
 	if(!!window.Checkout){
-		Checkout.prototype.gotoSection = function(section) {
+		Checkout.prototype.namespaceOriginalGotoSection = Checkout.prototype.gotoSection;
+		Checkout.prototype.gotoSection = function(section,reloadProgressBlock) { 
 			utag.data=$jsonUDO;
 			utag.data["page_name"] = section;
 			utag.view(utag.data);
-			section = $('opc-'+section);
-			section.addClassName('allow');
-			this.accordion.openSection(section)
+			this.namespaceOriginalGotoSection(section,reloadProgressBlock);
 		}
 	}
 	

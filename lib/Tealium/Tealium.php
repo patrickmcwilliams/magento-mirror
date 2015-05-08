@@ -40,7 +40,7 @@ class Tealium {
 		if ($objectOrKey instanceof Closure) {
 			$updatedUdo = $objectOrKey();
 		} elseif (is_array ( $objectOrKey )) {
-			$updatedUdo = $objectOrKey();
+			$updatedUdo = $objectOrKey;
 		} else {
 			$updatedUdo = "{}";
 		}
@@ -69,7 +69,7 @@ class Tealium {
 	}
 	public function render($type = null, $external = false, $sync = "sync") {
 		
-		if ( !($_REQUEST ["tealium_api"] && $_REQUEST ["tealium_api"] == "true") && $external) {
+		if ( !(isset($_REQUEST["tealium_api"]) && $_REQUEST["tealium_api"] == "true") && $external) {
 			$type = "udo";
 			$is_async = ($sync == "sync") ? "" : "async";
 			$udo = "<script type=\"text/javascript\" src=\"";
@@ -121,7 +121,7 @@ EOD;
 </script>
 <!-- ************************************* -->
 EOD;
-		if ($_REQUEST["tealium_api"] && $_REQUEST["tealium_api"] == "true") {
+		if (isset($_REQUEST["tealium_api"]) && $_REQUEST["tealium_api"] == "true") {
 			$tag = $insert_tag . "\n//TEALIUM_END\n";
 			$udo = "//TEALIUM_START\n" . $udoJs;
 		}

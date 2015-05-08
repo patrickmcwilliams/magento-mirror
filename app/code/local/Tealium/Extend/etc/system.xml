@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <tealium_tags  translate="label" module="tealium_tags">
+                    <groups>
+                      <general translate="label">
+                       <fields>
+						   <udo translate="label">
+							   	<comment>
+						   			<![CDATA[<span class="notice"></span>]]> 
+								</comment>
+                               <label>Custom UDO file path</label>
+                               <frontend_type>text</frontend_type>
+                               <sort_order>16</sort_order>
+                               <show_in_default>0</show_in_default>
+                               <show_in_website>0</show_in_website>
+                               <show_in_store>0</show_in_store>
+                           </udo>
+                       </fields>
+                       </general>
+                    </groups>
+        </tealium_tags>
+    </sections>
+</config>
