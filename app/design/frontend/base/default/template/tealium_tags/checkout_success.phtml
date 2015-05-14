@@ -1,0 +1,22 @@
+<?php
+
+$helper = Mage::helper('tealium_tags');
+$store = Mage::app()->getStore();
+
+if (!$helper->isEnabled($store)) {
+    return; // not enabled, no javascript inserted
+}
+
+$tealium = $helper->init($store, $this, "Confirmation")->
+addCustomDataFromSetup($store, "Confirmation")->
+getTealiumObject();
+
+if ($helper->getIsExternalScript($store)){
+	echo $tealium->render("full", false);
+}
+else {
+	echo $tealium->render("udo");
+}
+
+echo $helper->getDiagnosticTag($store);
+?>

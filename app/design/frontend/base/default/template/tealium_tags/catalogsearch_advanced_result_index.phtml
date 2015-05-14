@@ -1,0 +1,50 @@
+<?php
+
+$helper = Mage::helper('tealium_tags');
+$store = Mage::app()->getStore();
+
+if (!$helper->isEnabled($store)) {
+    return; // not enabled, no javascript inserted
+}
+
+$terms = array();
+
+$searchCriterias = $this->getSearchCriterias();
+foreach (array('left', 'right') as $side) {
+    if(@$searchCriterias[$side]) {
+        foreach($searchCriterias[$side] as $criteria) {
+            $terms[] = $this->htmlEscape($this->helper('catalog')->__($criteria['name'])) .
+                ":" . $this->htmlEscape($criteria['value']);
+        }
+    }
+}
+
+if (empty($terms)) {
+    $terms[] = "no-criteria";
+}
+
+$customData = array();
+$customData["page_type"] = "advanced search results";
+$customData["page_type"] = "advanced search";
+$customData["search_results"] = $this->getResultCount();
+$customData["search_keyword"] = implode('","', $terms);
+
+$tealium = $helper->init($store, $this, "Search")->
+			addCustomDataFromSetup($store, "Search")->
+			addCustomDataFromObject($customData)->
+			getTealiumObject();
+
+if ($helper->getIsExternalScript($store)){
+	$syncType = "sync";
+	$externalScriptType = $helper->getExternalScriptType($store);
+	if ($externalScriptType == "sync" || $externalScriptType == "async"){
+		$syncType = $externalScriptType;
+	}
+	echo $tealium->render("full", true, $syncType);
+}
+else {
+	echo $tealium->render("udo");
+}
+
+echo $helper->getDiagnosticTag($store);
+?>
