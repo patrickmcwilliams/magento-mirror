@@ -76,11 +76,11 @@ class TealiumData {
 		$outputArray = array();
 		$outputArray['site_region'] = Mage::app()->getLocale()->getLocaleCode() ?: "";
 		$outputArray['site_currency'] = $store->getCurrentCurrencyCode() ?: "";
-		$outputArray['page_name'] = $_category ? ($_category->getName() ?: "") : "";
+		$outputArray['page_name'] = isset($_category) ? ($_category->getName() ?: "") : "";
 		$outputArray['page_type'] = "category";
-		$outputArray['page_section_name'] = $section ?: "";
-		$outputArray['page_category_name'] = $category ?: "";
-		$outputArray['page_subcategory_name'] = $subcategory ?: "";
+		$outputArray['page_section_name'] = isset($section) ?: "";
+		$outputArray['page_category_name'] = isset($category) ?: "";
+		$outputArray['page_subcategory_name'] = isset($subcategory) ?: "";
 		
 		return $outputArray;
 	}
@@ -175,7 +175,7 @@ class TealiumData {
 		$outputArray['product_category'] = array();
 		$outputArray['product_quantity'] = $checkout_qtys ?: array();
 		$outputArray['product_unit_price'] = $checkout_prices ?: array();
-+		$outputArray['product_list_price'] = $checkout_original_prices ?: array();
+		$outputArray['product_list_price'] = $checkout_original_prices ?: array();
 
 		$outputArray['product_price'] = $outputArray['product_unit_price'];
 		$outputArray['product_original_price'] = $outputArray['product_list_price'];
@@ -186,7 +186,7 @@ class TealiumData {
 	public function getOrderConfirmation(){
 		$store = TealiumData::$store;
 		$page = TealiumData::$page;
-		
+
 		if (Mage::getSingleton('customer/session')->isLoggedIn()) {
 			$customer       = Mage::getSingleton('customer/session')->getCustomer();
 			$customer_id    = $customer->getEntityId();
@@ -197,6 +197,15 @@ class TealiumData {
 		
 		if (Mage::getModel('sales/order')) {
 			$order = Mage::getModel('sales/order')->loadByIncrementId($page->getOrderId());
+            $order_id = $order->getIncrementId();
+            $order_discount = number_format($order->getDiscountAmount(), 2, ".", "");
+            $order_subtotal = number_format($order->getSubtotal(), 2, ".", "");
+            $order_shipping = number_format($order->getShippingAmount(), 2, ".", "");
+            $order_tax = number_format($order->getTaxAmount(), 2, ".", "");
+            $order_payment_type = $order->getPayment() ? $order->getPayment()->getMethodInstance()->getTitle() : 'unknown';
+            $order_currency = $order->getOrderCurrencyCode();
+            $order_total = number_format($order->getGrandTotal(), 2, ".", "") ?: "";
+
 			foreach ($order->getAllVisibleItems() as $item) {
 		
 				$ids[]           = $item->getProductId();
@@ -232,28 +241,28 @@ class TealiumData {
         $outputArray['site_currency'] =  $store->getCurrentCurrencyCode() ?: "";
         $outputArray['page_name'] =  "cart success";   
         $outputArray['page_type'] =  "cart";
-		$outputArray['order_id'] = $order->getIncrementId() ?: "";
-		$outputArray['order_discount'] = number_format($order->getDiscountAmount(), 2, ".", "") ?: "";
-		$outputArray['order_subtotal'] = number_format($order->getSubtotal(), 2, ".", "") ?: "";
-		$outputArray['order_shipping'] = number_format($order->getShippingAmount(), 2, ".", "") ?: "";
-		$outputArray['order_tax'] = number_format($order->getTaxAmount(), 2, ".", "") ?: "";
-		$outputArray['order_payment_type'] = $order->getPayment() ? $order->getPayment()->getMethodInstance()->getTitle() : 'unknown';
-		$outputArray['order_total'] = number_format($order->getGrandTotal(), 2, ".", "") ?: "";
-		$outputArray['order_currency'] = $order->getOrderCurrencyCode() ?: "";
-		$outputArray['customer_id'] = $customer_id ?: "";
-		$outputArray['customer_email'] = $order->getCustomerEmail() ?: "";
-		$outputArray['product_id'] = $ids ?: array();
-		$outputArray['product_sku'] = $skus ?: array();
-		$outputArray['product_name'] = $names ?: array();
-		$outputArray['product_brand'] = $brands ?: array();
+		$outputArray['order_id'] = isset($order_id) ? $order_id : "";
+		$outputArray['order_discount'] = isset($order_discount) ? $order_discount : "";
+		$outputArray['order_subtotal'] = isset($order_subtotal) ? $order_subtotal : "";
+		$outputArray['order_shipping'] = isset($order_shipping) ? $order_shipping : "";
+		$outputArray['order_tax'] = isset($order_tax) ? $order_tax : "";
+		$outputArray['order_payment_type'] = isset($order_payment_type) ? $order_payment_type : 'unknown';
+		$outputArray['order_total'] = isset($order_total) ? $order_total : "";
+		$outputArray['order_currency'] = isset($order_currency) ? $order_currency : "";
+		$outputArray['customer_id'] = isset($customer_id) ? $customer_id : "";
+		$outputArray['customer_email'] = isset($customer_email) ? $customer_email : "";
+		$outputArray['product_id'] = isset($ids) ? $ids : array();
+		$outputArray['product_sku'] = isset($skus) ? $skus : array();
+		$outputArray['product_name'] = isset($names) ? $names : array();
+		$outputArray['product_brand'] = isset($brands) ? $brands : array();
 		$outputArray['product_category'] = array();
-		$outputArray['product_unit_price'] = $prices ?: array();
-		$outputArray['product_list_price'] = $original_prices ?: array();
+		$outputArray['product_unit_price'] = isset($prices) ? $prices : array();
+		$outputArray['product_list_price'] = isset($original_prices) ? $original_prices : array();
 		$outputArray['product_price'] = $outputArray['product_unit_price'];
 		$outputArray['product_original_price'] = $outputArray['product_list_price'];
-		$outputArray['product_quantity'] = $qtys ?: array();
-		$outputArray['product_discount'] = $discounts ?: array();
-		$outputArray['product_discounts'] = $discount_quantity ?: array();
+		$outputArray['product_quantity'] = isset($qtys) ? $qtys : array();
+		$outputArray['product_discount'] = isset($discounts) ? $discounts: array();
+		$outputArray['product_discounts'] = isset($discount_quantity) ? $discount_quantity : array();
 		
 		return  $outputArray;
 	}
@@ -276,9 +285,9 @@ class TealiumData {
 		$outputArray['site_currency'] = $store->getCurrentCurrencyCode() ?: "";
 		$outputArray['page_name'] = $page->getLayout()->getBlock('head')->getTitle() ?: "";
 		$outputArray['page_type'] = $page->getTealiumType() ?: "";
-		$outputArray['customer_id'] = $customer_id ?: "";
-		$outputArray['customer_email'] = $customer_email ?: "";
-		$outputArray['customer_type'] = $customer_type ?: "";
+		$outputArray['customer_id'] = isset($customer_id) ? $customer_id : "";
+		$outputArray['customer_email'] = isset($customer_email) ? $customer_email : "";
+		$outputArray['customer_type'] = isset($customer_type) ? $customer_type : "";
 		
 		return $outputArray;
 	}
@@ -321,5 +330,4 @@ $udoElements = array(
 );
 
 
-?> 
-
+?>
