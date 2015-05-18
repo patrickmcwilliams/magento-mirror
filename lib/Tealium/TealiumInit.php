@@ -146,7 +146,6 @@ class TealiumData {
 	public function getCartPage() {
 		$store = TealiumData::$store;
 		$page = TealiumData::$page;
-		$checkout_ids = $checkout_skus = $checkout_names = $checkout_qtys = $checkout_prices = $checkout_original_prices = $checkout_brands = array();
 		
 		if (Mage::helper('checkout')) {
 			$quote = Mage::helper('checkout')->getQuote();
@@ -168,14 +167,14 @@ class TealiumData {
 		$outputArray['page_type'] = "checkout";
 
 		// THE FOLLOWING NEEDS TO BE MATCHED ARRAYS (SAME NUMBER OF ELEMENTS)
-		$outputArray['product_id'] = $checkout_ids ?: array();
-		$outputArray['product_sku'] = $checkout_skus ?: array();
-		$outputArray['product_name'] = $checkout_names ?: array();
-		$outputArray['product_brand'] = $checkout_brands ?: array();
+		$outputArray['product_id'] = isset($checkout_ids) ?: array();
+		$outputArray['product_sku'] = isset($checkout_skus) ?: array();
+		$outputArray['product_name'] = isset($checkout_names) ?: array();
+		$outputArray['product_brand'] = isset($checkout_brands) ?: array();
 		$outputArray['product_category'] = array();
-		$outputArray['product_quantity'] = $checkout_qtys ?: array();
-		$outputArray['product_unit_price'] = $checkout_prices ?: array();
-		$outputArray['product_list_price'] = $checkout_original_prices ?: array();
+		$outputArray['product_quantity'] = isset($checkout_qtys) ?: array();
+		$outputArray['product_unit_price'] = isset($checkout_prices) ?: array();
+		$outputArray['product_list_price'] = isset($checkout_original_prices) ?: array();
 
 		$outputArray['product_price'] = $outputArray['product_unit_price'];
 		$outputArray['product_original_price'] = $outputArray['product_list_price'];
