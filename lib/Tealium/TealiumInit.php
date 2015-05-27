@@ -109,7 +109,7 @@ class TealiumData {
 			if ( !($outputArray['product_brand'] = array( $page->getProduct()->getBrand() )) ){
 				$outputArray['product_brand'] = array();
 			}
-			if ( !($outputArray['product_unit_price'] = array( number_format($page->getProduct()->getSpecialPrice(), 2) )) ){
+			if ( !($outputArray['product_unit_price'] = array( number_format($page->getProduct()->getFinalPrice(), 2) )) ){
 				$outputArray['product_unit_price'] = array();
 			}
 			if ( !($outputArray['product_list_price'] = array( number_format($page->getProduct()->getPrice(), 2) )) ){
