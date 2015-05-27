@@ -13,6 +13,22 @@ class TealiumData {
 	public static function setPage($page){
 		TealiumData::$page = $page;
 	}
+
+	public function getBaseData() {
+		$store = TealiumData::$store;
+		$page = TealiumData::$page;
+		$return = array();
+		$return['site_region'] = Mage::app()->getLocale()->getLocaleCode() ?: "";
+		$return['site_currency'] = $store->getCurrentCurrencyCode() ?: "";
+		if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+			$return['customer'] = Mage::getSingleton('customer/session')->getCustomer();
+			$return['customer_id']    = $customer->getEntityId();
+			$return['customer_email'] = $customer->getEmail();
+			$return['groupId']        = $customer->getGroupId();
+			$return['customer_type']  = Mage::getModel('customer/group')->load($groupId)->getCode();
+		}
+		return $return;
+	}
 	
 	public function getHome(){
 		$store = TealiumData::$store;
@@ -109,7 +125,7 @@ class TealiumData {
 			if ( !($outputArray['product_brand'] = array( $page->getProduct()->getBrand() )) ){
 				$outputArray['product_brand'] = array();
 			}
-			if ( !($outputArray['product_unit_price'] = array( number_format($page->getProduct()->getSpecialPrice(), 2) )) ){
+			if ( !($outputArray['product_unit_price'] = array( number_format($page->getProduct()->getFinalPrice(), 2) )) ){
 				$outputArray['product_unit_price'] = array();
 			}
 			if ( !($outputArray['product_list_price'] = array( number_format($page->getProduct()->getPrice(), 2) )) ){
